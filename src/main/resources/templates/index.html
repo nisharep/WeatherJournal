@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org/">
+<head>
+    <meta charset="utf-8"/>
+    <title>Weather Journal</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css"
+          integrity="sha384-Zenh87qX5JnK2Jl0vWa8Ck2rdkQ2Bzep5IDxbcnCeuOxjzrPF/et3URy9Bv1WTRi" crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/js/bootstrap.min.js"
+            integrity="sha384-IDwe1+LCz02ROU9k972gdyvl+AESN10+x7tBKgc9I5HFtuNz0wWnPclzo6p9vxnk"
+            crossorigin="anonymous"></script>
+</head>
+<body class="container">
+<table>
+    <nav class="navbar navbar-expand-lg navbar-light bg-light">
+        <div class="container-fluid">
+            <a class="navbar-brand" href="#">Weather Journal</a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
+                <div class="navbar-nav">
+                    <a class="nav-link active" aria-current="page" href="#">Home</a>
+                    <a class="nav-link" th:href="@{/observation/add}">Add Observation</a>
+                </div>
+            </div>
+        </div>
+    </nav>
+    <div th:if="${observations.size() == 0}">
+        No weather observations.
+    </div>
+    <table class="table" th:if="${observations.size() > 0}">
+        <thead>
+        <tr>
+            <th scope="col">Date</th>
+            <th scope="col">Cloudiness</th>
+            <th scope="col">Temperature (F)</th>
+        </tr>
+        </thead>
+    <tr th:each="observation : ${observations}" th:object="${observation}">
+        <td th:text="${#dates.format(observation.date, 'yyyy-MM-dd')}"></td>
+        <td th:text="*{cloudiness}"></td>
+        <td th:text="*{tempF}"></td>
+    </tr>
+    </table>
+</table>
+</body>
+</html>

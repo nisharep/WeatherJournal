@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org/">
+<head>
+    <meta charset="utf-8"/>
+    <title>Add Observation</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css"
+          integrity="sha384-Zenh87qX5JnK2Jl0vWa8Ck2rdkQ2Bzep5IDxbcnCeuOxjzrPF/et3URy9Bv1WTRi" crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/js/bootstrap.min.js"
+            integrity="sha384-IDwe1+LCz02ROU9k972gdyvl+AESN10+x7tBKgc9I5HFtuNz0wWnPclzo6p9vxnk"
+            crossorigin="anonymous"></script>
+</head>
+<body class="container">
+<nav class="navbar navbar-expand-lg navbar-light bg-light">
+    <div class="container-fluid">
+        <a class="navbar-brand" href="#">Weather Journal</a>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
+            <div class="navbar-nav">
+                <a class="nav-link " aria-current="page" th:href="@{/}">Home</a>
+                <a class="nav-link active" href="#">Add Observation</a>
+            </div>
+        </div>
+    </div>
+</nav>
+<form class="row g-3 col-4 align-items-center" th:action="@{add}" method="post" th:object="${observationForm}">
+    <div class="col-12">
+        <label for="dateInput">Date</label>
+        <input id="dateInput" class="form-control" th:field="*{date}" th:classappend="${#fields.hasErrors('date')} ? 'is-invalid'">
+    </div>
+    <div class="col-12">
+        <label for="cloudinessInput">Cloudiness</label>
+        <input id="cloudinessInput" class="form-control" th:field="*{cloudiness}" th:classappend="${#fields.hasErrors('cloudiness')} ? 'is-invalid'">
+    </div>
+    <div class="col-12">
+        <label for="tempInput">Temperature (F)</label>
+        <input id="tempInput" class="form-control" th:field="*{tempF}" th:classappend="${#fields.hasErrors('tempF')} ? 'is-invalid'">
+    </div>
+    <div class="col-12">
+        <button class="btn btn-primary">Add Observation</button>&nbsp;<a th:href="@{/}" class="btn btn-outline-dark">Cancel</a>
+    </div>
+</form>
+</body>
+</html>
